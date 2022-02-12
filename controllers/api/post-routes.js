@@ -1,6 +1,4 @@
 const router = require('express').Router()
-const { resetWatchers } = require('nodemon/lib/monitor/watch')
-const sequelize = require('../../config/connection')
 const { Post, User, Comment} = require('../../models')
 const withAuth = require('../../utils/auth')
 
@@ -93,3 +91,5 @@ router.delete('/:id', withAuth, (req,res) =>{
     })
     .catch(err => res.status(500).json(err))
 })
+
+module.exports = router
