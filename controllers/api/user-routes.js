@@ -5,7 +5,8 @@ const { Comment, User, Post } = require('../../models')
 router.get('/', (req,res) =>{
     // Find all users
     User.findAll({
-        attributes: {exclude:['password']},
+        //attributes: {exclude:['password']},
+        attributes: ['id', 'username', 'email', 'password'],
         include: [
             {
                 model: Post,
@@ -13,7 +14,7 @@ router.get('/', (req,res) =>{
             },
             {
                 model: Comment,
-                attributes: ['id', 'comment']
+                attributes: ['id', 'text']
             }
         ]
     })
@@ -106,6 +107,7 @@ router.post('/login', (req,res) => {
             res.json({ user: dbUserData, message: 'You are now logged in!'})
         })
     })
+    .catch(err => console.log(err))
 })
 
 //logout
